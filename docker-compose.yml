@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  npm2pihole:
+    build:
+      context: .
+      dockerfile: dockerfile
+    env_file: .env
+    volumes:
+      - /root/npm/data/nginx/proxy_host/:/app/npm/:ro # Nginx Proxy Manger data.
+      - ./custom.list:/app/custom.list # PiHole's local dns file. Set to docker piholes data if running.
+      - ./ssh/:/root/.ssh/:ro # SSH key(s) for sftp. commit if unused
