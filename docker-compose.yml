@@ -4,8 +4,11 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    env_file: .env
+    env_file: config.env
     volumes:
-      - /root/npm/data/nginx/proxy_host/:/app/npm/:ro # Nginx Proxy Manger data.
-      - ./custom.list:/app/custom.list # PiHole's local dns file. Set to docker piholes data if running.
-      - ./ssh/:/root/.ssh/:ro # SSH key(s) for sftp. commit if unused
+        # Path to Nginx Proxy Mangers data/nginx/proxy_host folder.
+      - /path/to/npm/data/nginx/proxy_host/:/app/npm/:ro
+        # PiHole's /etc/pihole/custom.list file. commit if remote pihole
+#      - /path/to/piholes/data/custom.list:/app/custom.list
+        # SSH key(s) for sftp. commit if unused
+      - ./ssh/:/root/.ssh/
