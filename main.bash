@@ -95,12 +95,13 @@ main() {
         for i in "${dlist1[@]}"; do
             checkdnsfile "$i"
         done
-        dlist2=("${dlist1[*]}")
+        dlist2=("${dlist1[@]}")
         if [ $n != 0 ]; then
             echo Updated $n records
             if "$USFTP"; then putsftp; fi
         fi
     fi
+    n=0
 }
 
 while true; do
