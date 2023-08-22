@@ -33,6 +33,7 @@ EOF
 putsftp() {
     echo Uploading new dns list
     sftp "$SFTPIP":/etc/pihole <<EOF
+rename custom.list custom.list.bak
 put custom.list
 EOF
 }
@@ -80,6 +81,7 @@ checkdnsfile() {
     checkdns $test
 }
 main() {
+    if "$USFTP"; then getsftp; fi
     echo Starting Check
     dlist1=()
     # reads all the files in npm and gets the domains out of them then formats and puts them in the array
