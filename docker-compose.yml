@@ -1,9 +1,7 @@
 version: '3.3'
 services:
   npm2pihole:
-    build:
-      context: .
-      dockerfile: dockerfile
+    image: ghcr.io/c00ldude1oo/npm2pihole:main
     env_file: config.env
     volumes:
         # Path to Nginx Proxy Mangers data/nginx/proxy_host folder.
