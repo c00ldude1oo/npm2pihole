@@ -1,4 +1,4 @@
-name: Docker Release
+name: Docker Dev
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -6,16 +6,14 @@ name: Docker Release
 # documentation.
 
 on:
-  #schedule:
-  #  - cron: '20 17 * * *'
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
     paths-ignore:
     - 'README.md'
     - 'LICENSE'
     - '.github/**'
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "dev" ]
 
 env:
   # Use docker.io for Docker Hub if empty
