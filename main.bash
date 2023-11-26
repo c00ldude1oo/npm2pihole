@@ -107,5 +107,5 @@ main() {
 while true; do
     main
     echo sleeping
-    inotifywait -e modify,create,attrib npm
+    sleep 2
 done
