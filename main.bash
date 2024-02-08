@@ -8,8 +8,9 @@ sip=$SFTP_IP
 declare -a domains1
 declare -a domains2
 echo $(date) - Starting
+#dev echo - $ip - $usftp - $sip 
 #check config
-if [ $ip = '192.168.0.0'  ]; then
+if [ "$ip" = '192.168.0.0' ]; then
     echo Please set IP in config.env and restart.
     exit 1
 fi
@@ -64,8 +65,8 @@ checkdnsfile() {
     echo $(date) - Checking \""$*"\"
     domain=$1
     checkdns() {
-#dev        echo Checkdns input is \""$*"\"
-#dev        echo test \""$1"\" - \""$2"\"
+#dev         echo Checkdns input is -"$*"
+#dev         echo test - "$1" - "$2"
         if [ "$domain" == "$2" ]; then
             if [ "$ip" == "$1" ]; then
                 echo $(date) - Found
@@ -97,16 +98,16 @@ checkdnsfile() {
     checkdns $test
 }
 main() {
-#dev    echo Starting Check
+#dev     echo Starting Check
     domains1=()
     # reads all the files in npm and gets the domains out of them then formats and puts them in the array
     for file in npm/*; do domains1+=("$(grep "server_name" "$file" | sed "s/  server_name //; s/;//")"); done
-#dev   echo Found domains from npm
-#dev    echo "this  - last"
-#dev    echo "check - check"
-#dev    echo "  ""${#domains1[@]}""   -   ""${#domains2[@]}"
+#dev     echo Found domains from npm
+#dev     echo "this  - last"
+#dev     echo "check - check"
+#dev     echo "  ""${#domains1[@]}""   -   ""${#domains2[@]}"
     if [ "${domains1[*]}" != "${domains2[*]}" ]; then
-#dev        echo found new domains
+#dev         echo found new domains
         if "$usftp"; then getsftp; fi
         for i in "${domains1[@]}"; do
             checkdnsfile "$i"

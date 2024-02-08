@@ -3,4 +3,4 @@ RUN apk add --no-cache openssh-client
 WORKDIR /app
 COPY main.bash /app
 RUN sed  -i 's/#dev //' main.bash    
-CMD bash main.bash >> /dev/log
+CMD bash main.bash
