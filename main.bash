@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#made by @c00ldude1oo
 sleep 1
 n=0
 ip=$NPM_IP
@@ -7,8 +8,21 @@ sip=$SFTP_IP
 declare -a domains1
 declare -a domains2
 echo $(date) - Starting
+#check config
+if [ $ip = '192.168.0.0'  ]; then
+    echo Please set IP in config.env and restart.
+    exit 1
+fi
+if [ "${usftp,,}" != 'true' ] && [ "${usftp,,}" != 'false' ]; then
+    echo USE_SFTP must be set to 'true' or 'false' please set in config.env and restart.
+    exit 1
+fi
 #checks if using sftp
-if "$usftp"; then
+if "${usftp,,}"; then
+    if [ $sip = '192.168.0.0' ]; then
+        echo Please set SFTP_IP in config.env and restart.
+        exit 1
+    fi
     echo $(date) - Using sftp to get dns list
     # checks if ssh key has been made
     if [ ! -f /root/.ssh/id_rsa ]; then
