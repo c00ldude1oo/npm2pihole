@@ -4,7 +4,7 @@ A bash script in a docker container that will check nginx proxy manager for conf
 
 ## PREREQUISITES
 
-Nginx proxy manager *\*Must be on same host as nginx proxy manager*
+Nginx Proxy Manager (NPM) *\*NPM2Pihole must be on same host as NPM*
 
 pihole *remote or local host is supported
 
@@ -18,6 +18,7 @@ services:
   npm2pihole:
     image: ghcr.io/c00ldude1oo/npm2pihole:latest
     env_file: config.env
+    restart: unless-stopped
     volumes:
         # Path to Nginx Proxy Mangers data/nginx/proxy_host folder.
       - /path/to/npm/data/nginx/proxy_host/:/app/npm/:ro
@@ -44,14 +45,14 @@ After first run you can quit and add the -d flag
 
 ### config.env
 
-`IP=192.168.0.0`
+`NPM_IP=192.168.0.0`
 This is set to the IP of the nginx proxy manager
 
-`USFTP=true/false`
+`USE_SFTP=true/false`
 This is to enable/disable use of SFTP to use a remote pihole
 
-`SFTPIP=192.168.0.0`
-This is set to the IP of the pihole
+`SFTP_IP=192.168.0.0`
+This is set to the IP of the remote pihole
 
 ### docker-compose.yml
 
@@ -71,3 +72,5 @@ E.g. `path/to/pihole/etc-pihole/custom.list:/app/custom.list`
 #### `/root/.ssh`
 
 If you're not using a remote pihole this can be committed out
+
+E.g. `/home/docker_user/.ssh:/root/.ssh`
