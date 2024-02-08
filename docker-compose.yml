@@ -3,6 +3,7 @@ services:
   npm2pihole:
     image: ghcr.io/c00ldude1oo/npm2pihole:latest
     env_file: config.env
+    restart: unless-stopped
     volumes:
         # Path to Nginx Proxy Mangers data/nginx/proxy_host folder.
       - /path/to/npm/data/nginx/proxy_host/:/app/npm/:ro
