@@ -76,7 +76,7 @@ checkdnsfile() {
                 #filters out the wrong listing
                 grep -v "$1 $2" custom.list >>list
                 # adds to correct one
-                echo $(date) - "$ip" "$domain" >>list
+                echo "$ip" "$domain" >>list
                 # renames it back
                 cat list >custom.list
                 # removes copy
@@ -88,7 +88,7 @@ checkdnsfile() {
             # not in pihole records
             echo $(date) - Not found adding.
             # adds IP and domain to file
-            echo $(date) - "$ip" "$domain" >>custom.list
+            echo "$ip" "$domain" >>custom.list
             # adds to the counter for total edited domains
             n=$((n + 1))
         fi
