@@ -65,7 +65,7 @@ checkdnsfile() {
     echo $(date) - Checking \""$*"\"
     domain=$1
     checkdns() {
-#dev         echo Checkdns input is -"$*"
+#dev         echo Checkdns input is - \""$*"\"
 #dev         echo test - "$1" - "$2"
         if [ "$domain" == "$2" ]; then
             if [ "$ip" == "$1" ]; then
@@ -110,8 +110,11 @@ main() {
     if [ "${domains1[*]}" != "${domains2[*]}" ]; then
 #dev         echo found new domains
         if "$usftp"; then getsftp; fi
-        for i in "${domains1[@]}"; do
-            checkdnsfile "$i"
+        for i in "${domains1[@]}"; do 
+        #a temp fix for npm entries with more then 1 domain.
+            for a in $i; do
+                checkdnsfile "$a"
+            done
         done
         domains2=("${domains1[@]}")
         if [ $n != 0 ]; then
