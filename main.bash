@@ -15,12 +15,12 @@ if [ "$ip" = '192.168.0.0' ]; then
     exit 1
 fi
 if [ "${usftp,,}" != 'true' ] && [ "${usftp,,}" != 'false' ]; then
-    echo USE_SFTP must be set to 'true' or 'false' please set in config.env and restart.
+    echo USE_SFTP must be set to "true" or "false" please set in config.env and restart.
     exit 1
 fi
 #checks if using sftp
 if "${usftp,,}"; then
-    if [ $sip = '192.168.0.0' ]; then
+    if [ "$sip" = '192.168.0.0' ]; then
         echo Please set SFTP_IP in config.env and restart.
         exit 1
     fi
@@ -95,6 +95,7 @@ checkdnsfile() {
         echo
     }
     test=$(grep " $domain\$" custom.list)
+    # shellcheck disable=SC2086
     checkdns $test
 }
 main() {
@@ -123,6 +124,6 @@ main() {
 
 while true; do
     main
-    echo $(date) - sleeping
-    sleep 5
+#dev    echo $(date) - sleeping
+    sleep 15
 done
