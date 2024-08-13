@@ -13,7 +13,6 @@ pihole *remote or local host is supported
 1 Setup docker-compose.yml
 
 ```yaml
-version: '3.3'
 services:
   npm2pihole:
     image: ghcr.io/c00ldude1oo/npm2pihole:latest
@@ -22,9 +21,9 @@ services:
     volumes:
         # Path to Nginx Proxy Mangers data/nginx/proxy_host folder.
       - /path/to/npm/data/nginx/proxy_host/:/app/npm/:ro
-        # PiHole's /etc/pihole/custom.list file. commit if remote pihole
+        # PiHole's /etc/pihole/custom.list file. comment if remote pihole
 #      - /path/to/piholes/data/custom.list:/app/custom.list
-        # SSH key(s) for sftp. commit if unused
+        # SSH key(s) for sftp. comment if unused
       - ./ssh/:/root/.ssh/
 
 ```
